@@ -6,15 +6,9 @@
 #    By: sait-ben <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/17 15:12:18 by sait-ben          #+#    #+#              #
-#    Updated: 2016/12/19 20:01:50 by sait-ben         ###   ########.fr        #
+#    Updated: 2017/02/27 09:43:44 by sait-ben         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-NAME	= libft.a
-
-CFLAGS	= -Wall -Wextra -Werror
-
-OPTION	= -c
 
 SRCS 	= ft_atoi.c \
 		  ft_bzero.c \
@@ -24,6 +18,7 @@ SRCS 	= ft_atoi.c \
 		  ft_isdigit.c \
 		  ft_isprint.c \
 		  ft_itoa.c \
+		  ft_itoa_base.c \
 		  ft_lstadd.c \
 		  ft_lstdel.c \
 		  ft_lstdelone.c \
@@ -77,21 +72,68 @@ SRCS 	= ft_atoi.c \
 		  ft_swap.c \
 		  ft_tolower.c \
 		  ft_toupper.c \
-		  get_next_line.c
+		  get_next_line.c \
+		  ft_printf.c \
+		  convert.c \
+		  option_detect.c \
+		  options.c \
+		  int_arg.c \
+		  in_out.c \
+		  init_flags.c \
+		  s_arg.c \
+		  cast.c \
+		  dou_arg.c \
+		  apply_options.c \
+		  apply_options_bis.c \
+		  in_out.c \
+		  ft_maj.c \
+		  w_putchar.c \
+		  c_arg.c \
+		  p_arg.c \
+		  ft_itoa_base_uint.c \
+		  pct_arg.c \
+		  ft_valeur_absolue.c \
+		  ft_strsubwchar.c \
+		  apply_precision_p.c \
+		  ft_atoi_max.c \
+		  apply_zero.c \
+		  apply_precision.c \
+		  apply_options_ter.c 
 
-OBJS	= $(SRCS:%.c=%.o)
+OBJ_PATH = ./obj/
 
-all :	$(NAME)
+SOURCE_PATH = ./sources/
 
-$(NAME)	:
-	gcc $(OPTION) $(CFLAGS) $(SRCS)
-	ar rc $(NAME) $(OBJS)
-	ranlib $(NAME)
+OBJ_FILE = $(SRCS:%.c=%.o)
 
-clean :
-	rm -rf $(OBJS)
+OBJ	= $(OBJ_FILE:%=$(OBJ_PATH)%)
 
-fclean :	clean
-	rm -rf $(NAME)
+CFILES	= $(SRCS:%=./sources/%)
 
-re :	fclean all
+HEADER	= $(INC:%=./sources/%)
+
+FLAGS = -Wextra -Werror -Wall
+
+NAME = libft.a
+
+INC = libft.h \
+	  printf.h \
+	  get_next_line.h \
+
+$(OBJ_PATH)%.o: $(SOURCE_PATH)%.c $(HEADER)
+	    @mkdir -p $(OBJ_PATH)
+		gcc $(FLAGS) -o $@ -c $<
+
+all: $(NAME)
+
+$(NAME): $(OBJ)
+	    ar rc $(NAME) $(OBJ)
+		ranlib $(NAME)
+
+clean:
+	    /bin/rm -rf $(OBJ_PATH)
+
+fclean: clean
+	    /bin/rm -f $(NAME)
+
+re: fclean all

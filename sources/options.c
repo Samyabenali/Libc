@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strsub.c                                        :+:      :+:    :+:   */
+/*   options.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sait-ben <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/17 18:48:27 by sait-ben          #+#    #+#             */
-/*   Updated: 2016/11/20 15:43:45 by sait-ben         ###   ########.fr       */
+/*   Created: 2017/02/10 15:35:54 by sait-ben          #+#    #+#             */
+/*   Updated: 2017/02/10 15:35:58 by sait-ben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <string.h>
+#include "printf.h"
 
-char	*ft_strsub(const char *s, unsigned int start, size_t len)
+int		largeur(char *str, int i, t_options *opt)
 {
-	char	*str;
-	size_t	j;
-
-	str = (char*)malloc(sizeof(char) * len + 1);
-	if (str == NULL || !s)
-		return (NULL);
-	j = 0;
-	while (j < len)
+	opt->largeur = 0;
+	while (str[i] >= 48 && str[i] <= 57)
 	{
-		str[j] = s[start];
-		j++;
-		start++;
+		opt->largeur = (opt->largeur) * 10 + (str[i] - '0');
+		i++;
 	}
-	str[j] = '\0';
-	return (str);
+	return (i);
+}
+
+int		precision(char *str, int i, t_options *opt)
+{
+	opt->precision = 0;
+	i++;
+	while (str[i] <= 57 && str[i] >= 48)
+	{
+		opt->precision = opt->precision * 10 + (str[i] - '0');
+		i++;
+	}
+	return (i);
 }

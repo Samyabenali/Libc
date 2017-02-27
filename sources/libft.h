@@ -6,7 +6,7 @@
 /*   By: sait-ben <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 11:17:35 by sait-ben          #+#    #+#             */
-/*   Updated: 2016/12/19 20:01:21 by sait-ben         ###   ########.fr       */
+/*   Updated: 2017/02/27 09:47:31 by sait-ben         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include "get_next_line.h"
+# include "printf.h"
 
 typedef struct			s_list
 {
@@ -68,10 +69,11 @@ int						ft_strequ(char const *s1, char const *s2);
 int						ft_strnequ(char const *s1, char const *s2, size_t n);
 char					*ft_strsub(const char *s, unsigned int start,
 						size_t len);
+char					*ft_itoa_base(intmax_t value, int base);
 char					*ft_strjoin(char const *s1, char const *s2);
 char					*ft_strtrim(char const *s);
 char					**ft_strsplit(char const *s, char c);
-char					*ft_itoa(int n);
+char					*ft_itoa(intmax_t n);
 void					ft_putchar(char c);
 void					ft_putstr(char const *s);
 void					ft_putendl(char const *s);
